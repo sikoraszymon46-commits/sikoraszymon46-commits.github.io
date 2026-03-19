@@ -1,0 +1,655 @@
+<html>
+<head>
+    <title>Wsparcie w depresji | MCWR Głogów</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <style>
+        :root {
+            --bg: #f5f7fb;
+            --text: #222;
+            --card: #ffffff;
+            --accent: #234f8a;
+            --accent-soft: #e3ebff;
+            --danger: #c62828;
+            --font-size: 19px;
+        }
+
+        body.dark {
+            --bg: #101218;
+            --text: #e6e6e6;
+            --card: #1c1f27;
+            --accent: #4d8cff;
+            --accent-soft: #1b2640;
+            --danger: #ff6b6b;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: "Segoe UI", Arial, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            font-size: var(--font-size);
+            transition: background 0.3s, color 0.3s;
+        }
+
+        header {
+            background: var(--accent);
+            color: #fff;
+            padding: 16px 24px;
+            display: flex;
+            align-items: center;
+            gap: 18px;
+            box-shadow: 0 3px 12px rgba(0,0,0,0.35);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        header img {
+            height: 80px;
+            width: auto;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 30px;
+        }
+
+        header p {
+            margin: 4px 0 0;
+            opacity: 0.9;
+        }
+
+        nav {
+            margin-left: auto;
+            display: flex;
+            gap: 16px;
+            font-size: 15px;
+        }
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            opacity: 0.9;
+        }
+
+        nav a:hover {
+            opacity: 1;
+            text-decoration: underline;
+        }
+
+        main {
+            max-width: 1200px;
+            margin: 25px auto 40px;
+            padding: 0 20px;
+        }
+
+        section {
+            background: var(--card);
+            padding: 28px;
+            border-radius: 16px;
+            margin-bottom: 28px;
+            box-shadow: 0 4px 14px rgba(0,0,0,0.12);
+            opacity: 0;
+            transform: translateY(10px);
+            animation: fadeInUp 0.5s forwards;
+        }
+
+        section:nth-of-type(1) { animation-delay: 0.1s; }
+        section:nth-of-type(2) { animation-delay: 0.2s; }
+        section:nth-of-type(3) { animation-delay: 0.3s; }
+        section:nth-of-type(4) { animation-delay: 0.4s; }
+        section:nth-of-type(5) { animation-delay: 0.5s; }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        h2 {
+            color: var(--accent);
+            margin-top: 0;
+            font-size: 28px;
+        }
+
+        h3 {
+            color: var(--accent);
+            margin-top: 18px;
+        }
+
+        .hero {
+            border-radius: 18px;
+            overflow: hidden;
+            margin: 25px 0;
+            position: relative;
+        }
+
+        .hero img {
+            width: 100%;
+            height: 340px;
+            object-fit: cover;
+            filter: brightness(75%);
+        }
+
+        .hero-text {
+            position: absolute;
+            bottom: 24px;
+            left: 28px;
+            color: #fff;
+            font-size: 30px;
+            font-weight: 600;
+            text-shadow: 0 3px 8px rgba(0,0,0,0.7);
+            max-width: 70%;
+        }
+
+        .hero-sub {
+            font-size: 17px;
+            margin-top: 8px;
+            opacity: 0.95;
+        }
+
+        .disclaimer {
+            background: var(--accent-soft);
+            border-left: 5px solid var(--accent);
+            padding: 14px;
+            margin: 18px 0;
+            border-radius: 10px;
+            font-size: 0.95em;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 18px;
+        }
+
+        .card {
+            background: var(--card);
+            padding: 18px;
+            border-radius: 14px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 6px 16px rgba(0,0,0,0.16);
+        }
+
+        .card img {
+            width: 100%;
+            border-radius: 12px;
+            height: 190px;
+            object-fit: cover;
+            margin-bottom: 10px;
+        }
+
+        .icon {
+            font-size: 22px;
+            margin-right: 6px;
+        }
+
+        .btn, .btn-ghost {
+            padding: 10px 18px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 17px;
+            border: none;
+        }
+
+        .btn {
+            background: var(--accent);
+            color: #fff;
+        }
+
+        .btn:hover {
+            filter: brightness(1.05);
+        }
+
+        .btn-ghost {
+            background: transparent;
+            color: var(--accent);
+            border: 1px solid var(--accent);
+        }
+
+        .btn-ghost:hover {
+            background: var(--accent-soft);
+        }
+
+        .toggle-dark {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--accent);
+            color: #fff;
+            padding: 10px 16px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 15px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.35);
+            z-index: 200;
+        }
+
+        .question {
+            margin-bottom: 16px;
+        }
+
+        .question strong {
+            font-size: 19px;
+        }
+
+        .help-box {
+            background: rgba(198,40,40,0.12);
+            border-left: 5px solid var(--danger);
+            padding: 14px;
+            margin-top: 18px;
+            border-radius: 10px;
+        }
+
+        .faq-item {
+            margin-bottom: 14px;
+        }
+
+        .faq-q {
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .faq-a {
+            display: none;
+            margin-top: 6px;
+        }
+
+        .steps {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .steps li {
+            margin-bottom: 10px;
+        }
+
+        .steps span {
+            display: inline-block;
+            width: 26px;
+            height: 26px;
+            border-radius: 50%;
+            background: var(--accent);
+            color: #fff;
+            text-align: center;
+            line-height: 26px;
+            margin-right: 8px;
+            font-size: 15px;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 2fr 3fr;
+            gap: 18px;
+        }
+
+        .contact-grid label {
+            display: block;
+            margin-bottom: 6px;
+            font-weight: 600;
+        }
+
+        .contact-grid input,
+        .contact-grid textarea {
+            width: 100%;
+            padding: 8px 10px;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+            font-size: 15px;
+            font-family: inherit;
+        }
+
+        .contact-grid textarea {
+            min-height: 110px;
+            resize: vertical;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            font-size: 14px;
+            opacity: 0.85;
+        }
+
+        @media (max-width: 900px) {
+            header {
+                flex-wrap: wrap;
+            }
+            nav {
+                width: 100%;
+                justify-content: flex-start;
+                margin-top: 8px;
+            }
+            .hero-text {
+                font-size: 24px;
+                left: 16px;
+                bottom: 18px;
+                max-width: 90%;
+            }
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <img src="file:///C:/Users/Szymon/Desktop/iindex.html" alt="Logo Miejskiego Centrum Wspierania Rodziny w Głogowie">
+    <div>
+        <h1>Wsparcie w depresji – informacje, test i możliwości pomocy</h1>
+    </div>
+    <nav>
+        <a href="#o-depresji">O depresji</a>
+        <a href="#test">Test</a>
+        <a href="#pomoc">Pomoc</a>
+        <a href="#faq">FAQ</a>
+    </nav>
+</header>
+
+<main>
+
+    <!-- HERO -->
+    <div class="hero">
+        <img src="https://pieknoumyslu.com/wp-content/uploads/2018/03/dziewczynka-i-matka.jpg?auto=webp&quality=45&width=1920&crop=16:9,smart,safe" alt="Wsparcie emocjonalne">
+        <div class="hero-text">
+            Nie musisz radzić sobie sam.
+            <div class="hero-sub">
+                Rozmowa to pierwszy krok. MCWR w Głogowie wspiera dzieci, młodzież i dorosłych w kryzysie.
+            </div>
+        </div>
+    </div>
+
+    <!-- O DEPRESJI -->
+    <section id="o-depresji">
+        <h2>Czym jest depresja?</h2>
+        <p>
+            Depresja to zaburzenie nastroju, które wpływa na emocje, sposób myślenia, motywację i codzienne funkcjonowanie.
+            Może objawiać się długotrwałym smutkiem, utratą energii, trudnościami w koncentracji, poczuciem pustki
+            lub brakiem radości z rzeczy, które wcześniej cieszyły.
+        </p>
+        <p>
+            Nie jest oznaką słabości ani „lenistwem”. To realny stan zdrowia, który może dotknąć każdego – niezależnie od wieku,
+            sytuacji życiowej czy charakteru. Wymaga zrozumienia, wsparcia i często profesjonalnej pomocy.
+        </p>
+
+        <div class="disclaimer">
+            Ta strona ma charakter edukacyjny i nie zastępuje konsultacji z lekarzem, psychologiem ani innym specjalistą.
+            Jeśli martwisz się o siebie lub bliską osobę, rozważ kontakt z profesjonalnym wsparciem.
+        </div>
+
+        <div class="grid-3">
+            <div class="card">
+                <h3><span class="icon">💬</span>Objawy emocjonalne</h3>
+                <p>Przygnębienie, poczucie winy, bezradność, brak nadziei, poczucie pustki, drażliwość.</p>
+            </div>
+            <div class="card">
+                <h3><span class="icon">🩺</span>Objawy fizyczne</h3>
+                <p>Zmęczenie, problemy ze snem, napięcie w ciele, bóle bez wyraźnej przyczyny, zmiany apetytu.</p>
+            </div>
+            <div class="card">
+                <h3><span class="icon">🧠</span>Objawy poznawcze</h3>
+                <p>Trudności z koncentracją, spowolnienie myślenia, pesymistyczne widzenie przyszłości.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- KROKI POMOCY -->
+    <section>
+        <h2>Co możesz zrobić, gdy podejrzewasz depresję?</h2>
+        <ul class="steps">
+            <li><span>1</span> Nazwij to, co czujesz – spróbuj opisać swoje samopoczucie słowami.</li>
+            <li><span>2</span> Porozmawiaj z kimś zaufanym – bliską osobą, przyjacielem, nauczycielem.</li>
+            <li><span>3</span> Rozważ kontakt z psychologiem, lekarzem lub innym specjalistą.</li>
+            <li><span>4</span> Skorzystaj z dostępnych numerów wsparcia i instytucji pomocowych.</li>
+            <li><span>5</span> Pamiętaj, że proszenie o pomoc jest oznaką troski o siebie, a nie słabości.</li>
+        </ul>
+        <button class="btn-ghost" onclick="document.getElementById('pomoc').scrollIntoView({behavior:'smooth'})">
+            Zobacz, gdzie szukać pomocy
+        </button>
+    </section>
+
+    <!-- TEST -->
+    <section id="test">
+        <h2>Test samopoczucia (10 pytań)</h2>
+        <p>
+            Ten test ma charakter orientacyjny. Odpowiedz, jak często w ciągu ostatnich dwóch tygodni doświadczałeś/doświadczałaś
+            poniższych trudności.
+        </p>
+
+        <form id="moodTest">
+            <div class="question">
+                <strong>1. Jak często czułeś/czułaś się przygnębiony/a?</strong><br>
+                <input type="radio" name="q1" value="0"> wcale<br>
+                <input type="radio" name="q1" value="1"> kilka dni<br>
+                <input type="radio" name="q1" value="2"> ponad połowę dni<br>
+                <input type="radio" name="q1" value="3"> prawie codziennie<br>
+            </div>
+
+            <div class="question">
+                <strong>2. Jak często brakowało Ci energii?</strong><br>
+                <input type="radio" name="q2" value="0"> wcale<br>
+                <input type="radio" name="q2" value="1"> kilka dni<br>
+                <input type="radio" name="q2" value="2"> ponad połowę dni<br>
+                <input type="radio" name="q2" value="3"> prawie codziennie<br>
+            </div>
+
+            <div class="question">
+                <strong>3. Jak często miałeś/miałaś trudności z koncentracją?</strong><br>
+                <input type="radio" name="q3" value="0"> wcale<br>
+                <input type="radio" name="q3" value="1"> kilka dni<br>
+                <input type="radio" name="q3" value="2"> ponad połowę dni<br>
+                <input type="radio" name="q3" value="3"> prawie codziennie<br>
+            </div>
+
+            <div class="question">
+                <strong>4. Jak często odczuwałeś/odczuwałaś brak radości z rzeczy, które zwykle cieszą?</strong><br>
+                <input type="radio" name="q4" value="0"> wcale<br>
+                <input type="radio" name="q4" value="1"> kilka dni<br>
+                <input type="radio" name="q4" value="2"> ponad połowę dni<br>
+                <input type="radio" name="q4" value="3"> prawie codziennie<br>
+            </div>
+
+            <div class="question">
+                <strong>5. Jak często miałeś/miałaś problemy ze snem?</strong><br>
+                <input type="radio" name="q5" value="0"> wcale<br>
+                <input type="radio" name="q5" value="1"> kilka dni<br>
+                <input type="radio" name="q5" value="2"> ponad połowę dni<br>
+                <input type="radio" name="q5" value="3"> prawie codziennie<br>
+            </div>
+
+            <div class="question">
+                <strong>6. Jak często odczuwałeś/odczuwałaś silny niepokój lub napięcie?</strong><br>
+                <input type="radio" name="q6" value="0"> wcale<br>
+                <input type="radio" name="q6" value="1"> kilka dni<br>
+                <input type="radio" name="q6" value="2"> ponad połowę dni<br>
+                <input type="radio" name="q6" value="3"> prawie codziennie<br>
+            </div>
+
+            <div class="question">
+                <strong>7. Jak często miałeś/miałaś poczucie beznadziejności?</strong><br>
+                <input type="radio" name="q7" value="0"> wcale<br>
+                <input type="radio" name="q7" value="1"> kilka dni<br>
+                <input type="radio" name="q7" value="2"> ponad połowę dni<br>
+                <input type="radio" name="q7" value="3"> prawie codziennie<br>
+            </div>
+
+            <div class="question">
+                <strong>8. Jak często miałeś/miałaś problemy z apetytem (mniejszy lub większy niż zwykle)?</strong><br>
+                <input type="radio" name="q8" value="0"> wcale<br>
+                <input type="radio" name="q8" value="1"> kilka dni<br>
+                <input type="radio" name="q8" value="2"> ponad połowę dni<br>
+                <input type="radio" name="q8" value="3"> prawie codziennie<br>
+            </div>
+
+            <div class="question">
+                <strong>9. Jak często czułeś/czułaś się przeciążony/a codziennymi obowiązkami?</strong><br>
+                <input type="radio" name="q9" value="0"> wcale<br>
+                <input type="radio" name="q9" value="1"> kilka dni<br>
+                <input type="radio" name="q9" value="2"> ponad połowę dni<br>
+                <input type="radio" name="q9" value="3"> prawie codziennie<br>
+            </div>
+
+            <div class="question">
+                <strong>10. Jak często miałeś/miałaś trudności z motywacją do działania?</strong><br>
+                <input type="radio" name="q10" value="0"> wcale<br>
+                <input type="radio" name="q10" value="1"> kilka dni<br>
+                <input type="radio" name="q10" value="2"> ponad połowę dni<br>
+                <input type="radio" name="q10" value="3"> prawie codziennie<br>
+            </div>
+
+            <button type="button" class="btn" onclick="calculateTest()">Oblicz wynik</button>
+        </form>
+
+        <p id="testResult"></p>
+
+        <div id="testHelp" class="help-box" style="display:none;">
+            Ten wynik nie jest diagnozą. Jeśli Twoje odpowiedzi wskazują na częste trudności,
+            rozważ rozmowę z lekarzem, psychologiem lub innym specjalistą. W sytuacji nagłego
+            zagrożenia życia skontaktuj się z numerem alarmowym.
+        </div>
+    </section>
+
+    <!-- POMOC -->
+    <section id="pomoc">
+        <h2>Gdzie szukać pomocy?</h2>
+
+        <div class="grid-3">
+            <div class="card">
+                <h3><span class="icon">📞</span>Numery ogólnopolskie</h3>
+                <p>Uzupełnij aktualne dane:</p>
+                <ul>
+                    <li>Telefon wsparcia kryzysowego: <strong>116 123</strong></li>
+                    <li>Telefon zaufania dla dzieci i młodzieży: <strong>116 111</strong></li>
+                    <li>Telefon dla dorosłych w kryzysie: <strong>116 123</strong></li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <h3><span class="icon">🏥</span>Wsparcie lokalne – Głogów</h3>
+                <ul>
+                    <li>Poradnia zdrowia psychicznego</li>
+                    <li>Ośrodek interwencji kryzysowej</li>
+                    <li>Organizacje pozarządowe wspierające zdrowie psychiczne</li>
+                </ul>
+                <p>Aktualne dane kontaktowe warto sprawdzić na stronach lokalnych instytucji.</p>
+            </div>
+
+            <div class="card">
+                <h3><span class="icon">👨‍👩‍👧‍👦</span>MCWR w Głogowie</h3>
+                <ul>
+                    <li><strong>Adres:</strong>  Folwarczna 7</li>
+                    <li><strong>Telefon:</strong> +48 76 85 33 832/33</li>
+                    <li><strong>Godziny pracy:</strong> Pn.-Śr. 7:00-11:00  Cz.-Pt. 12:00-16:00</li>
+                </ul>
+                <p>Miejskie Centrum Wspierania Rodziny oferuje wsparcie dla dzieci, młodzieży i dorosłych w trudnych sytuacjach życiowych.</p>
+            </div>
+        </div>
+
+        <div class="help-box">
+            Jeśli obawiasz się o swoje bezpieczeństwo lub bezpieczeństwo bliskiej osoby,
+            potraktuj to jako sytuację nagłą i skontaktuj się z numerem alarmowym.
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq">
+        <h2>Najczęściej zadawane pytania (FAQ)</h2>
+
+        <div class="faq-item">
+            <div class="faq-q" onclick="toggleFaq(this)">Czy depresja może dotknąć każdego?</div>
+            <div class="faq-a">
+                Tak. Depresja może pojawić się u osób w różnym wieku i w różnych sytuacjach życiowych.
+                Często nie ma jednej, prostej przyczyny – to zwykle splot wielu czynników.
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-q" onclick="toggleFaq(this)">Czy rozmowa naprawdę coś zmienia?</div>
+            <div class="faq-a">
+                Rozmowa z kimś zaufanym lub specjalistą może być pierwszym krokiem do ulgi.
+                Nazwanie tego, co się dzieje, często zmniejsza poczucie osamotnienia.
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-q" onclick="toggleFaq(this)">Kiedy warto szukać profesjonalnej pomocy?</div>
+            <div class="faq-a">
+                Gdy obniżony nastrój, brak energii, lęk lub inne trudności utrzymują się dłużej niż kilka tygodni,
+                utrudniają codzienne funkcjonowanie lub pojawiają się myśli o śmierci – to ważny sygnał,
+                by skontaktować się ze specjalistą.
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-q" onclick="toggleFaq(this)">Czy MCWR może mnie pokierować dalej?</div>
+            <div class="faq-a">
+                MCWR może udzielić informacji o dostępnych formach wsparcia, pomóc w znalezieniu odpowiednich instytucji
+                oraz towarzyszyć w procesie szukania pomocy.
+            </div>
+        </div>
+    </section>
+
+</main>
+
+<footer>
+    Strona informacyjna przygotowana przez Miejskie Centrum Wspierania Rodziny w Głogowie.  
+    Materiał edukacyjny – nie zastępuje profesjonalnej diagnozy ani leczenia.
+</footer>
+
+<div class="toggle-dark" onclick="toggleDark()">Tryb ciemny</div>
+
+<script>
+function calculateTest() {
+    const form = document.getElementById("moodTest");
+    let sum = 0;
+
+    for (let i = 1; i <= 10; i++) {
+        const field = form["q" + i];
+        const val = field && field.value;
+        if (!val) {
+            document.getElementById("testResult").textContent = "Uzupełnij wszystkie odpowiedzi, aby zobaczyć wynik.";
+            document.getElementById("testHelp").style.display = "none";
+            return;
+        }
+        sum += Number(val);
+    }
+
+    let text = "Twój wynik: " + sum + " pkt. ";
+
+    if (sum <= 10) {
+        text += "Może to wskazywać na łagodne obniżenie nastroju.";
+    } else if (sum <= 20) {
+        text += "Możliwe są istotniejsze trudności w samopoczuciu – rozważ rozmowę ze specjalistą.";
+    } else {
+        text += "Wynik sugeruje nasilone trudności – zdecydowanie warto skontaktować się ze specjalistą.";
+    }
+
+    document.getElementById("testResult").textContent = text + " Ten test nie jest diagnozą.";
+    document.getElementById("testHelp").style.display = "block";
+}
+
+function toggleDark() {
+    document.body.classList.toggle("dark");
+}
+
+function toggleFaq(el) {
+    const answer = el.nextElementSibling;
+    answer.style.display = answer.style.display === "block" ? "none" : "block";
+}
+</script>
+
+</body>
+</html>
